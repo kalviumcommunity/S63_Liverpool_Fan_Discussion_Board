@@ -44,4 +44,4 @@ Git/GitHub: Version control and collaboration.
 
 Why This Project
 
-I have chosen this project because it is an amalgamation of my passion for Liverpool FC and interest in web development. This project will enable me to learn and implement core MERN stack concepts, such as CRUD operations, database management, and frontend-backend communication. It's a simple yet meaningful project that would improve my ability to build full-stack applications and give me confidence to take on more complex projects in the future. Plus, it's cool to create something that could resonate with fellow Liverpool fans..
+I have chosen this project because it is an amalgamation of my passion for Liverpool FC and interest in web development. This project will enable me to learn and implement core MERN stack concepts, such as CRUD operations, database management, and frontend-backend communication. It's a simple yet meaningful project that would improve my ability to build full-stack applications and give me confidence to take on more complex projects in the future. Plus, it's cool to create something that could resonate with fellow Liverpool fans...
