@@ -1,0 +1,22 @@
+meta {
+  name: Update
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8000/api/posts/67a9cd7b1c7c23770bb79571
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "postId": "104",
+      "userId": "004",
+      "title": "Klopp’s Best Signing?",
+      "content": "Who do you think is Klopp's best signing at Liverpool? Salah, Van Dijk, or Alisson?",
+      "likes": 8,
+      "createdAt": "2024-06-20T14:20:00Z"
+    }
+}
