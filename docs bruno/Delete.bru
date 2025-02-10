@@ -1,0 +1,22 @@
+meta {
+  name: Delete
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:8000/api/posts/67a9cd7b1c7c23770bb79571
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "postId": "101",
+    "userId": "001",
+    "title": "Salah's Goal vs Man United 🔥 (Updated)",
+    "content": "This goal was pure magic! Salah is truly world-class! 🔥⚽",
+    "likes": 20,
+    "createdAt": "2025-02-05T11:00:00Z"
+  }
+}
