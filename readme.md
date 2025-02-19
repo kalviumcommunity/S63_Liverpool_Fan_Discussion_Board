@@ -53,3 +53,4 @@ https://s63-liverpool-fan-discussion-board-1.onrender.com
 
 FRONTEND : Deployment Link using Netlify: 
 
+https://flourishing-mandazi-bb2428.netlify.app/
