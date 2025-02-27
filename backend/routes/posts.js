@@ -6,13 +6,14 @@ const router = express.Router();
 // ✅ Create a Post
 router.post("/posts", async (req, res) => {
     try {
-        const newPost = new Post(req.body);
-        await newPost.save();
-        res.status(201).json(newPost);
+      const { title, content, author } = req.body;
+      const newPost = new Post({ title, content, author });
+      await newPost.save();
+      res.status(201).json({ message: "Post created successfully!" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: "Failed to create post" });
     }
-});
+  });
 
 // ✅ Read All Posts
 router.get("/posts", async (req, res) => {

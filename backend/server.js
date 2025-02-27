@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./connectDB"); // Import MongoDB connection function
-const postRoutes = require("./routes/routes"); // Import routes
+const postRoutes = require("./routes/posts"); // Import routes
 
 const app = express();
 
