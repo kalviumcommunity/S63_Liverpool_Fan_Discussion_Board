@@ -1,22 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import PostCard from "./components/Postcard";
+import AddEntity from "./pages/AddEntity";
 
 function App() {
-  const samplePost = {
-    title: "Liverpool's Latest Win!",
-    content: "Liverpool defeated Manchester City 3-1 in a thrilling match at Anfield!",
-    author: "LFCfan99",
-  };
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/add" element={<AddEntity />} />
       </Routes>
-      <div className="post-container">
-        <PostCard post={samplePost} />
-      </div>
     </Router>
   );
 }

@@ -3,12 +3,17 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./connectDB"); // Import MongoDB connection function
 const postRoutes = require("./routes/posts"); // Import routes
+const entityRoutes = require("./routes/entities");
+
+
+
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use("/api", entityRoutes);
 
 // Connect to MongoDB Atlas
 connectDB();
