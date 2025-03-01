@@ -1,0 +1,70 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: red;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container */
+  .add-entity-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+  }
+  
+  /* Heading */
+  .add-entity-container h2 {
+    color: #c8102e;
+    margin-bottom: 15px;
+  }
+  
+  /* Input Field */
+  .add-entity-container input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Button */
+  .add-entity-container button {
+    background-color: #c8102e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .add-entity-container button:hover {
+    background-color: #a00b22;
+  }
+  
+  /* Entity List */
+  .entity-list {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .entity-list li {
+    background: goldenrod;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    list-style: none;
+    border-left: 4px solid #c8102e;
+    font-size: 16px;
+  }
+  
