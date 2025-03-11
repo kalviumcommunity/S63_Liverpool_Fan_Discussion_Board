@@ -1,0 +1,90 @@
+.update-entity-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .update-entity-container h2 {
+    color: #007bff; /* Blue for Update */
+    margin-bottom: 15px;
+  }
+  
+  .update-entity-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .update-entity-container input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .update-entity-container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .update-entity-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .update-entity-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+  }
+  
+  .update-entity-list li {
+    background: #e9ecef;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .update-buttons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .update-buttons button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .update-buttons .edit-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .update-buttons .edit-btn:hover {
+    background-color: #218838;
+  }
+  
+  .update-buttons .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .update-buttons .delete-btn:hover {
+    background-color: #c82333;
+  }
+  

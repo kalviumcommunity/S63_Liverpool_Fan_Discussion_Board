@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Post.css"; // Import the CSS file
+import "../styles/Post.css"; // Import the CSS file
 
 const Post = () => {
   const [post, setPost] = useState({
