@@ -1,27 +1,40 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./connectDB"); // Import MongoDB connection function
-const postRoutes = require("./routes/posts");
-const entityRoutes = require("./routes/entities");
+const connectDB = require("./connectDB");
 
 const app = express();
 
 // ✅ Connect to MongoDB first
 connectDB();
 
-// Middleware
+// ✅ Middleware
 app.use(express.json());
 app.use(cors());
 
-// ✅ Use Routes after connecting to DB
-app.use("/api", entityRoutes);
-app.use("/api", postRoutes); // All routes are prefixed with /api
+// ✅ Use Routes with Proper Prefix
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/posts", require("./routes/postRoutes"));
+app.use("/api/comments", require("./routes/commentRoutes"));
+app.use("/api/likes", require("./routes/likeRoutes"));
+app.use("/api/fanclubs", require("./routes/fanClubRoutes"));
+app.use("/api/matches", require("./routes/matchRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
+app.use("/api/players", require("./routes/playerRoutes"));
+app.use("/api/reports", require("./routes/reportRoutes"));
+app.use("/api/teams", require("./routes/teamRoutes"));
 
-// Default route
+// ✅ Default route
 app.get("/", (req, res) => {
   res.send("Liverpool Fan Discussion Board API is Running! 🔴⚽");
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// ✅ Global Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error("❌ Server Error:", err.message);
+  res.status(500).json({ error: "Internal Server Error" });
+});
+
+// ✅ Start Server
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
