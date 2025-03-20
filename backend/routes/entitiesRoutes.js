@@ -3,12 +3,18 @@ const router = express.Router();
 const Entity = require("../models/Entity");
 
 // ✅ Add an entity (CREATE)
-router.post("/entities", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: "Entity name is required." });
+    }
+
+    // Check if entity already exists
+    const existingEntity = await Entity.findOne({ name });
+    if (existingEntity) {
+      return res.status(400).json({ error: "Entity with this name already exists." });
     }
 
     const newEntity = new Entity({ name });
@@ -20,7 +26,7 @@ router.post("/entities", async (req, res) => {
 });
 
 // ✅ Get all entities (READ)
-router.get("/entities", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const entities = await Entity.find();
     res.status(200).json(entities);
@@ -30,7 +36,7 @@ router.get("/entities", async (req, res) => {
 });
 
 // ✅ Get a single entity by ID
-router.get("/entities/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const entity = await Entity.findById(req.params.id);
     if (!entity) {
@@ -43,7 +49,7 @@ router.get("/entities/:id", async (req, res) => {
 });
 
 // ✅ Update an entity (UPDATE)
-router.put("/entities/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { name } = req.body;
 
@@ -68,7 +74,7 @@ router.put("/entities/:id", async (req, res) => {
 });
 
 // ✅ Delete an entity (DELETE)
-router.delete("/entities/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const deletedEntity = await Entity.findByIdAndDelete(req.params.id);
     if (!deletedEntity) {

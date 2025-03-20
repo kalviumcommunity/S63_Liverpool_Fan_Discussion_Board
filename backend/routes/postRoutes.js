@@ -4,9 +4,9 @@ const Post = require("../models/Post");
 const router = express.Router();
 
 // ✅ Create a Post with Validation
-router.post("/posts", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        const { title, content, author } = req.body;
+        const { title, content, created_by } = req.body;
 
         // Manual validation before inserting into DB
         if (!title || title.length < 5 || title.length > 100) {
@@ -15,11 +15,11 @@ router.post("/posts", async (req, res) => {
         if (!content || content.length < 10) {
             return res.status(400).json({ error: "Content must be at least 10 characters long." });
         }
-        if (!author) {
-            return res.status(400).json({ error: "Author is required." });
+        if (!created_by) {
+            return res.status(400).json({ error: "Creator is required." });
         }
 
-        const newPost = new Post({ title, content, author });
+        const newPost = new Post({ title, content, created_by });
         await newPost.save();
         res.status(201).json({ message: "Post created successfully!", post: newPost });
     } catch (error) {
@@ -27,10 +27,10 @@ router.post("/posts", async (req, res) => {
     }
 });
 
-// ✅ Read All Posts
-router.get("/posts", async (req, res) => {
+// ✅ Read All Posts with User Details
+router.get("/", async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().populate("created_by", "username email");
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -38,7 +38,7 @@ router.get("/posts", async (req, res) => {
 });
 
 // ✅ Update a Post by ID with Validation
-router.put("/posts/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const { title, content } = req.body;
 
@@ -63,7 +63,7 @@ router.put("/posts/:id", async (req, res) => {
 });
 
 // ✅ Delete a Post by ID
-router.delete("/posts/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const deletedPost = await Post.findByIdAndDelete(req.params.id);
 
@@ -72,6 +72,17 @@ router.delete("/posts/:id", async (req, res) => {
         }
 
         res.status(200).json({ message: "Post deleted successfully!" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ✅ Fetch Posts by Specific User
+router.get("/user/:userId", async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const posts = await Post.find({ created_by: userId }).populate("created_by", "username email");
+        res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

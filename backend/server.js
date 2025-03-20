@@ -23,6 +23,7 @@ app.use("/api/notifications", require("./routes/notificationRoutes"));
 app.use("/api/players", require("./routes/playerRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 app.use("/api/teams", require("./routes/teamRoutes"));
+app.use("/api/entities", require("./routes/entitiesRoutes"));
 
 // ✅ Default route
 app.get("/", (req, res) => {
@@ -33,6 +34,17 @@ app.get("/", (req, res) => {
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.message);
   res.status(500).json({ error: "Internal Server Error" });
+});
+
+// ✅ Handle Uncaught Exceptions & Unhandled Rejections
+process.on("uncaughtException", (err) => {
+  console.error("❌ Uncaught Exception:", err);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("❌ Unhandled Rejection:", reason);
+  process.exit(1);
 });
 
 // ✅ Start Server
