@@ -10,10 +10,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/add" element={<AddEntity />} />
+        <Route path="/add" element={<Post />} /> {/* Route for adding posts */}
+        <Route path="/add-entity" element={<AddEntity />} /> {/* Route for adding SQL entities */}
         <Route path="/entities" element={<EntityList />} />
         <Route path="/update/:id" element={<UpdateEntity />} />
-        <Route path="/posts" element={<Post />} /> {/* Adding Post page */}
+        <Route path="/posts" element={<Post />} />
       </Routes>
     </Router>
   );

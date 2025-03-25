@@ -2,15 +2,34 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./connectDB");
+const { initializeDatabase, seedDatabase } = require('./sqlModels');
 
 const app = express();
 
 // ✅ Connect to MongoDB first
 connectDB();
 
+// ✅ Initialize MySQL database
+initializeDatabase()
+  .then(() => {
+    console.log("✅ MySQL database initialized successfully");
+    // Seed the database with initial data
+    return seedDatabase();
+  })
+  .then(() => {
+    console.log("✅ MySQL database seeded successfully");
+  })
+  .catch(err => {
+    console.error("❌ MySQL initialization error:", err);
+  });
+
 // ✅ Middleware
 app.use(express.json());
 app.use(cors());
+
+// ✅ MySQL Routes
+app.use("/api/sql/users", require("./routes/sqlUserRoutes"));
+app.use("/api/sql/entities", require("./routes/sqlEntityRoutes"));
 
 // ✅ Use Routes with Proper Prefix
 app.use("/api/users", require("./routes/userRoutes"));
