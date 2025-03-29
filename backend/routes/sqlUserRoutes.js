@@ -3,6 +3,63 @@ const router = express.Router();
 const { User } = require("../sqlModels");
 const bcrypt = require("bcrypt");
 
+// ✅ Login user
+router.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password are required" });
+    }
+    
+    // Find user by username
+    const user = await User.findOne({ where: { username } });
+    
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+    
+    // Compare passwords
+    const isMatch = await user.comparePassword(password);
+    
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+    
+    // Set username in cookie
+    res.cookie('username', user.username, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: 'strict'
+    });
+    
+    // Return user without password
+    const userResponse = user.toJSON();
+    delete userResponse.password;
+    
+    res.status(200).json({ 
+      message: "Login successful", 
+      user: userResponse 
+    });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ✅ Logout user
+router.post("/logout", (req, res) => {
+  try {
+    // Clear the username cookie
+    res.clearCookie('username');
+    
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Error logging out:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ✅ Get all users
 router.get("/", async (req, res) => {
   try {
